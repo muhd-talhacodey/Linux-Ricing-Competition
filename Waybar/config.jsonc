@@ -1,0 +1,129 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "height": 38,
+    "exclusive":true,
+    "passthrough":false,
+    "spacing": 4,
+    "margin-top": 8,
+    "margin-left": 10,
+    "margin-right": 10,
+
+    // Layout Order
+    "modules-left": [
+        "hyprland/workspaces",
+        "wlr/taskbar"
+    ],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "cpu",
+        "backlight",
+        "pulseaudio",
+        "network",
+        "bluetooth",
+        "battery",
+        "custom/night-light",
+    ],
+
+    // --- Left: Tab / Workspace Manager ---
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "active-only": false,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        }
+    },
+
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 18,
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "app_ids-mapping": {
+            "firefoxrc": "firefox"
+        }
+    },
+
+    // --- Center: Clock ---
+    "clock": {
+        "timezone": "Asia/Dubai",
+        "format": "  {:%I:%M %p}",
+        "format-alt": "  {:%A, %B %d, %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    // --- Right: Core Modules ---
+"cpu": {
+    "interval": 2,
+    "format": "CPU: {usage}%",
+    "on-click": "kitty --class floating_monitor -e top",
+    "tooltip": true
+},
+
+"pulseaudio": {
+        "format": "󰕾 {volume}%", // Kept your exact icon layout untouched
+        "format-bluetooth": "󰂰 {volume}%",
+        "format-muted": "󰝟 Muted",
+        "max-volume": 100, // Hard caps the display percentage at 100%
+        "scroll-step": 5,
+        "on-click": "pavucontrol", // Cleared pavucontrol to prevent the 'command not found' crash
+        "tooltip": false
+    },
+
+"backlight": {
+        "device": "intel_backlight", // Change to your specific GPU folder if needed
+        "format": "󰃠 {percent}%", // Single static clean brightness icon
+        "scroll-step": 5,
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
+    },
+
+    "network": {
+    "interface": "wlan0", // Change this to your interface name if it differs (e.g., wlp3s0)
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀  {ipaddr}/{cidr}",
+    "format-disconnected": "󰖪  Disconnected",
+    "tooltip-format": "󰈀  {ifname} via {gwaddr}",
+    "tooltip-format-wifi": "  {essid} ({signaldBm}dBm)",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "on-click": "~/.config/waybar/scripts/wifi-menu.sh"
+},
+
+
+"bluetooth": {
+        "format": "󰂯 On",
+        "format-disabled": "󰂲 Off", // Keeps icon visible even when disabled
+        "format-connected": "󰂱 {device_alias}",
+        "on-click": "blueman-manager", // Opens bluetooth manager GUI if installed
+        "tooltip": false
+    },
+        
+"battery": {
+    "states": {
+        "warning": 20,
+        "critical": 10
+    },
+    "format": "Bat: {capacity}%",
+    "format-charging": "Bat: {capacity}% ⚡",
+    "format-plugged": "Bat: {capacity}% ",
+    "format-alt": "Bat: {time}",
+    "tooltip": true
+},
+
+    // --- Right: Custom System Controls ---
+
+"custom/night-light": {
+    "format": "󰖔 ",
+    "tooltip": false,
+    "on-click": "pgrep wlsunset && killall wlsunset || wlsunset -l 25.3 -t 4000 -T 6500 &",
+    "on-click-right": "killall wlsunset"
+}
+
+}

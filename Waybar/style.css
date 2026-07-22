@@ -1,0 +1,181 @@
+* Catppuccin Mocha Theme Palette */
+@define-color base      #1e1e2e;
+@define-color mantle    #181825;
+@define-color crust     #11111b;
+@define-color text      #cdd6f4;
+@define-color subtext0  #a6adc8;
+@define-color surface0  #313244;
+@define-color surface1  #45475a;
+@define-color surface2  #585b70;
+@define-color mauve     #cba6f7;
+@define-color pink      #f5c2e7;
+@define-color red       #f38ba8;
+@define-color green     #a6e3a1;
+@define-color yellow    #f9e2af;
+@define-color blue      #89b4fa;
+@define-color lavender  #b4befe;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    /* Transparent background allowing Hyprland's layerrule blur to shine through */
+    background-color: rgba(30, 30, 46, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: @text;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+/* Individual Module Pill Layout Styling */
+#workspaces,
+#clock,
+#cpu,
+#network,
+#bluetooth,
+#battery,
+#custom-power-profile,
+#custom-night-light,
+#custom-power {
+    background-color: rgba(69, 71, 90, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0px 14px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    color: @text;
+}
+
+/* Add space after the workspace buttons */
+#workspaces {
+    margin-right: 12px;
+}
+
+/* Style the taskbar buttons for Floorp and Kitty */
+#taskbar button {
+    padding: 0 8px;
+    margin: 0 2px;
+    background: rgba(255, 255, 255, 0.05); /* Subtle background for open apps */
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+#taskbar button.active {
+    background: #3b4261; 
+    border-bottom: 2px solid #7aa2f7; /* Highlights the window you are currently using */
+}
+
+/* Color Highlights - Unified Blue Theme */
+#clock {
+    
+    /* Crisp light blue text */
+    color: #89b4fa; /* Catppuccin Blue */
+    
+    /* Subtle border to give the module definition against the dark background */
+    border: 1px solid rgba(137, 180, 250, 0.4); 
+    border-radius: 8px;
+    padding: 2px 10px;
+    margin: 4px 2px;
+    font-weight: bold;
+}
+
+#workspaces button.active {
+    color: #74c7ec; /* Catppuccin Sapphire */
+}
+
+#workspaces button:hover {
+    background-color: rgba(116, 199, 236, 0.2);
+    border-radius: 6px;
+    color: #74c7ec;
+}
+
+#cpu {
+    
+    /* Crisp light blue text */
+    color: #89dceb; /* Catppuccin Blue */
+    background-color: @surface0;
+    /* Subtle border to give the module definition against the dark background */
+    border: 1px solid rgba(137, 180, 250, 0.4); 
+    border-radius: 8px;
+    padding: 2px 10px;
+    margin: 4px 2px;
+    font-weight: bold;
+    /* This handles the frost blur effect in Waybar */
+    transition: all 0.3s ease;
+}
+
+#pulseaudio,
+#backlight {
+    background-color: @surface0;
+    color: @text;
+    padding: 0px 15px;
+    margin: 5px 3px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle highlight edge */    
+}
+
+/* Specific Accents for Icons */
+#pulseaudio {
+    color: @mauve;
+}
+
+#backlight {
+    color: @lavender;
+}
+
+/* If volume is muted, give it a subtle warning color */
+#pulseaudio.muted {
+    background-color: rgba(243, 139, 168, 0.2);
+    color: #f38ba8;
+}
+
+#network {
+    color: #89dceb; /* Catppuccin Sky */
+    background-color: @surface0;
+}
+
+#bluetooth {
+    color: #74c7ec; /* Catppuccin Sapphire */
+    background-color: @surface0;
+}
+
+/* Default State (Normal, White Text, Frosted Glass) */
+#battery {
+    color: #cdd6f4;                              /* Catppuccin Text (White-ish) */
+    background-color: rgba(255, 255, 255, 0.1);  /* Frosted background */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 2px 10px;
+    margin: 4px 2px;
+    font-weight: bold;
+}
+
+/* Fully Charged State (Green Text) */
+#battery.full {
+    color: #a6e3a1;                              /* Catppuccin Green */
+}
+
+/* Charging State */
+#battery.charging {
+    color: #f9e2af;                              /* Catppuccin Yellow */
+}
+
+/* Warning & Critical States (< 20% and < 10% - Red Text) */
+#battery.warning, #battery.critical {
+    color: #f38ba8;                              /* Catppuccin Red */
+    animation-name: blink;                       /* Optional: Makes it blink when low */
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-night-light {
+    color: #89dceb; /* Catppuccin Sky */
+    background-color: @surface0;
+}
